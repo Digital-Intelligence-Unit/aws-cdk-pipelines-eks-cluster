@@ -12,6 +12,7 @@ import { ContainerInsights } from "./infrastructure/container-insights";
 import { Calico } from "./infrastructure/calico";
 import { Prometheus } from "./infrastructure/prometheus";
 import { Echoserver } from "./application/echoserver";
+import { _SETTINGS } from "../config";
 
 export interface EksClusterStackProps extends cdk.StackProps {
   clusterVersion: eks.KubernetesVersion;
@@ -22,14 +23,14 @@ export class EksClusterStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props: EksClusterStackProps) {
     super(scope, id, props);
 
-    const vpc = new ec2.Vpc(this, "Vpc", { maxAzs: 3 });
-
+    const existingVPCID = cdk.SecretValue.secretsManager("existingVPCID");
+    const vpc = ec2.Vpc.fromLookup(this, "BIPlatformVPC", { vpcName: 'VPC_DIU_Dev' });
     const cluster = new eks.Cluster(this, `acme-${props.nameSuffix}`, {
       clusterName: `acme-${props.nameSuffix}`,
       version: props.clusterVersion,
       defaultCapacity: 0,
       vpc,
-      vpcSubnets: [{ subnetType: ec2.SubnetType.PRIVATE }],
+      vpcSubnets: [{subnetType: ec2.SubnetType.PRIVATE}],
     });
 
     const aud = `${cluster.clusterOpenIdConnectIssuer}:aud`;

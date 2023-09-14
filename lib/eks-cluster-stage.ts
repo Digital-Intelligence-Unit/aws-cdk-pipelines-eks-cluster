@@ -1,6 +1,7 @@
 import eks = require("@aws-cdk/aws-eks");
 import { Construct, Environment, StackProps, Stage } from "@aws-cdk/core";
 import { EksClusterStack } from "./eks-cluster-stack";
+import { _SETTINGS } from "../config";
 
 export interface EksClusterStageProps extends StackProps {
   clusterVersion: eks.KubernetesVersion;
