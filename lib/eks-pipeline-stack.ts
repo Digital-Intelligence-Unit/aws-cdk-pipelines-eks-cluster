@@ -26,7 +26,7 @@ export class EksPipelineStack extends cdk.Stack {
             authentication:githubToken
           }
         ),
-        commands: ["npm ci", "npm run build", "npx cdk synth"],
+        commands: ["npm ci", "npm run build", "npx cdk synth --verbose"],
       }),
       pipelineName: "BI_Platform_EKS-Pipeline",
     });
