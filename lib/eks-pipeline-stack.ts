@@ -29,7 +29,7 @@ export class EksPipelineStack extends cdk.Stack {
         commands: ["npm ci", "npm run build", "npx cdk synth --verbose"],
       }),
       pipelineName: "BI_Platform_EKS-Pipeline",
-    });
+    }); 
 
     const eksClusterStagePopHealth = new EksClusterStage(this, "EKSClusterB", {
       clusterVersion: eks.KubernetesVersion.V1_21,
