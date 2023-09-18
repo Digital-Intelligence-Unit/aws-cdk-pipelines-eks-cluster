@@ -21,7 +21,7 @@ export class EksPipelineStack extends cdk.Stack {
       synth: new ShellStep("Synth", {
         input: CodePipelineSource.gitHub(
           "Digital-Intelligence-Unit/aws-cdk-pipelines-eks-cluster",
-          "main",
+          "development",
           {
             authentication:githubToken
           }
@@ -31,7 +31,7 @@ export class EksPipelineStack extends cdk.Stack {
       pipelineName: "BI_Platform_EKS-Pipeline",
     }); 
 
-    const eksClusterStagePopHealth = new EksClusterStage(this, "EKSClusterB", {
+    const eksClusterStagePopHealth = new EksClusterStage(this, "Population-Health-Dev", {
       clusterVersion: eks.KubernetesVersion.V1_21,
       nameSuffix: "Population_Health_Dev",
       env: {
@@ -57,7 +57,7 @@ export class EksPipelineStack extends cdk.Stack {
       ],
     });
 
-    const appDnsStage = new AppDnsStage(this, "UpdateDNS", {
+    const appDnsStage = new AppDnsStage(this, "EKSCluster-UpdateDNS", {
       envName: "Population_Health_Dev",
       env: {
         account: process.env.CDK_DEFAULT_ACCOUNT,
@@ -66,7 +66,7 @@ export class EksPipelineStack extends cdk.Stack {
     });
 
     pipeline.addStage(appDnsStage, {
-      pre: [new ManualApprovalStep(`Promote-Population_Health_Dev}-Environment`)],
+      pre: [new ManualApprovalStep(`Promote-Population-Health-Dev-Environment`)],
     });
   }
 }
