@@ -1,0 +1,36 @@
+{
+  "name": "@amzn/sample-aws-cdk-pipelines-eks-cluster",
+  "version": "0.1.0",
+  "bin": {
+    "aws-cdk-pipelines-eks-cluster": "bin/eks-pipeline.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk"
+  },
+  "license": "MIT-0",
+  "repository": "https://github.com/aws-samples/aws-cdk-pipelines-eks-cluster",
+  "devDependencies": {
+    "@aws-cdk/assert": "1.121.0",
+    "@types/jest": "^26.0.10",
+    "@types/node": "10.17.27",
+    "jest": "^26.4.2",
+    "ts-jest": "^26.2.0",
+    "aws-cdk": "1.121.0",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.6.3"
+  },
+  "dependencies": {
+    "@aws-cdk/core": "1.121.0",
+    "@aws-cdk/aws-eks": "1.121.0",
+    "@aws-cdk/pipelines": "1.121.0",
+    "source-map-support": "^0.5.16",
+    "@types/js-yaml": "latest",
+    "js-yaml": "latest",
+    "aws-cdk-lib": "2.83.1",
+    "sync-request": "latest",
+    "constructs": "^10.0.0"
+  }
+}
